@@ -429,6 +429,30 @@
     background: var(--border);
   }
 
+  /* main screen slot row */
+  .main-slot-row {
+    display: flex;
+    gap: 8px;
+  }
+  .btn-main-slot {
+    flex: 1;
+    padding: 9px 0;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    background: var(--surface);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    touch-action: manipulation;
+  }
+  .btn-main-slot.active {
+    background: rgba(212,168,71,0.15);
+    color: var(--gold2);
+    border-color: rgba(212,168,71,0.5);
+  }
+
   /* slot tabs inside editor */
   .editor-slot-row {
     display: flex;
@@ -481,6 +505,12 @@
 
 <div class="btn-sub-row">
   <button class="btn-sub" onclick="toggleEditor()">⚙ Edit</button>
+</div>
+
+<div class="main-slot-row">
+  <button class="btn-main-slot" id="main-slot-S" onclick="selectSlot('S')">S</button>
+  <button class="btn-main-slot" id="main-slot-A" onclick="selectSlot('A')">A</button>
+  <button class="btn-main-slot" id="main-slot-B" onclick="selectSlot('B')">B</button>
 </div>
 
 <div class="editor" id="editor" style="display:none">
@@ -539,6 +569,8 @@ function updateSlotButtons() {
   ['S','A','B'].forEach(s => {
     const btn = document.getElementById('slot-' + s);
     if (btn) btn.classList.toggle('active', s === currentSlot);
+    const mainBtn = document.getElementById('main-slot-' + s);
+    if (mainBtn) mainBtn.classList.toggle('active', s === currentSlot);
   });
 }
 
